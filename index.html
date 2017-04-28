@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+	<head>
+
+  		<meta charset="utf-8">
+    	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    	<meta name="viewport" content="width=device-width, initial-scale=1">
+    	<meta name="author" content="Steffen Burzlaff">
+
+		<title>Bullenmarkt</title>
+
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+		<!-- Normalize.css -->
+    	<link rel="stylesheet" href="normalize.css">
+
+    	<!-- Own CSS.Style -->
+    	<link rel="stylesheet" href="style.css">
+		
+		<script type="text/javascript" src="http://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+		<script type="text/javascript" src="http://canvasjs.com/assets/script/canvasjs.min.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.min.js"></script>
+	</head>
+	<body>
+
+		<!--Begin Header -->
+		<header>
+			<nav class="navbar navbar-default">
+			  <div class="container-fluid">
+			    <div class="navbar-header">
+			      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+			        <span class="sr-only">Toggle navigation</span>
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+			      </button>
+			      <a class="navbar-brand" href="#">Bullenmarkt</a>
+			    </div>
+			    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			      <ul class="nav navbar-nav">
+			        <li class="active"><a href="#">Berechnung <span class="sr-only">(current)</span></a></li>
+			        <li><a href="#">Aktien</a></li>
+			      </ul>
+			      <ul class="nav navbar-nav navbar-right">
+			        <li><a href="#">Impressum</a></li>
+			      </ul>
+			    </div>
+			  </div>
+			</nav>
+		</header>
+		<!-- End Header -->
+
+		<!-- Begin StockCalculator -->
+		<div class="container">
+			<div class="row">
+  				<div class="panel panel-default">
+
+  					<!-- Begin Jumbotron -->
+  					<div class="panel-heading jumbotron">
+		  				<h1>Berechnen</h1>
+						<p>Bitte füllen Sie folgende Felder aus!</p>
+					</div>
+					<!-- End Jumbotron -->
+
+					<!-- Begin StockCalculator -->
+					<div class="panel-body" id="formular"> 
+						<form class="form-horizontal" data-toggle="validator" data-error="Bitte fülle das Formular vollständig aus!" role="form">
+							<div class="form-group">
+								<label for="aktKurs" class="col-sm-3 control-label">aktueller Kurs</label>
+								<div class="col-sm-5">
+									<input type="number" class="form-control" id="aktKurs" data-error="Bitte gebe den aktuellen Kurs ein" placeholder="derzeitiger Aktienkurs" required>
+									<div class="help-block with-errors"></div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="invest" class="col-sm-3 control-label">Investment Betrag</label>
+								<div class="col-sm-5">
+									<input type="number" class="form-control" id="invest" data-error="Bitte geben Sie die Höhe Ihres Investments an" placeholder="Höhe des Investments" required>
+									<div class="help-block with-errors"></div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="gebuehren" class="col-sm-3 control-label">Gebühren</label>
+								<div class="col-sm-5">
+									<input type="number" class="form-control" id="gebuehren" placeholder="Eventuelle Gebühren, Händlergebühren, etc.">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="choices" class="col-sm-3 control-label">Gewinn oder Kursziel</label>
+								<div class="col-sm-5">
+									<select id="choice" class="form-control">
+										<option>Gewinn</option>
+										<option>Kursziel</option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="ziel" class="col-sm-3 control-label">Ziel in €</label>
+								<div class="col-sm-5">
+									<input type="number" class="form-control" id="ziel" data-error="Bitte geben Sie den gewünschten Gewinn oder den erwarteten Kurs an." placeholder="Gewinn oder Kursziel" required>
+									<div class="help-block with-errors"></div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label"></label>
+								<div class="col-sm-5">
+									<button id="submit" type="button" class="btn btn-success form-control">Berechnen</button>
+								</div>
+							</div>
+						</form>
+					</div>
+					<!-- End StockCalculator -->
+
+					<!-- Begin StockCalculatorResult -->
+					<div class="container jumbotron">
+						<p id="kursZiel"></p>
+						<p id="prozent"></p>
+					</div>
+					<!-- End StockCalculatorResult -->
+
+				</div>
+			</div>
+		</div>
+		<!-- End StockCalculator -->
+
+	</body>
+
+	<!-- Begin Scipts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="functions.js"></script>
+	<!-- End Scripts -->
+
+</html>
