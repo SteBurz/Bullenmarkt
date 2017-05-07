@@ -4,9 +4,32 @@
 
 */
 
+.container-fluid {
+    margin: 0% 5% 0% 5%;
+}
 
 /*
 
 	Form
 
 */
+
+.panel-heading {
+    background-color: dimgray;
+}
+
+.panel-body {
+    background-color: dimgray;
+    color: white;
+
+}
+
+.show {
+    max-height:100%;
+    transition: 1s ease-in-out;
+    overflow: hidden;
+}
+
+.show.hidden {
+    max-height: 0;
+}
